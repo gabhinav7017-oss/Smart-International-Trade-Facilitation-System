@@ -25,3 +25,22 @@ A Priority Queue is an abstract data type where each element has a priority, and
 Graph coloring involves assigning colors to certain elements of a graph subject to certain constraints. In logistics, no two adjacent vertices (conflicting hazardous materials) can share the same color (storage zone).
 * **Algorithm**: Backtracking explores all potential color assignments and abandons a path (pruning) as soon as it determines the current assignment violates a safety conflict.
 * **Time Complexity**: $O(m^V)$, where $m$ is the number of available zones and $V$ is the number of hazardous materials. While exponential, the number of dangerous goods classes (e.g., IMDG classes) is small (9 primary classes), making Backtracking perfectly viable.
+
+## 5. References & Sources
+To build the theoretical and practical foundations of this system, the following academic and engineering sources were utilized:
+
+1. **Dijkstra's Routing**: 
+   - Dijkstra, E. W. (1959). *"A Note on Two Problems in Connexion with Graphs"*. Numerische Mathematik. [Link to Paper](https://dl.acm.org/doi/10.1145/321156.321161)
+   - GeeksForGeeks: [Dijkstra’s shortest path algorithm](https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/)
+2. **Dynamic Programming (0/1 Knapsack)**:
+   - Bellman, R. (1957). *"Dynamic Programming"*. Princeton University Press.
+   - Introduction to Algorithms (CLRS) - Chapter 15: Dynamic Programming. [MIT Press](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
+3. **Binary Heaps & Priority Queues**:
+   - Williams, J. W. J. (1964). *"Algorithm 232 - Heapsort"*. Communications of the ACM.
+   - Python `heapq` standard library documentation: [docs.python.org/3/library/heapq.html](https://docs.python.org/3/library/heapq.html)
+4. **Graph Coloring & Backtracking**:
+   - International Maritime Dangerous Goods (IMDG) Code segregation tables (Real-world constraints used for mapping conflicts). [IMO IMDG Code](https://www.imo.org/en/OurWork/Safety/Pages/DangerousGoods.aspx)
+   - Backtracking Algorithms: [Stanford CS Library](http://cslibrary.stanford.edu/114/)
+5. **UI / Design Architecture**:
+   - "Glassmorphism in UI Design" via CSS-Tricks: [css-tricks.com](https://css-tricks.com/glassmorphism-in-css/)
+   - `http.server` — HTTP servers implementation in Python: [docs.python.org](https://docs.python.org/3/library/http.server.html)
