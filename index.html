@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portage — Smart Trade System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .result-box {
+            margin-top: 2rem;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            background: rgba(212, 175, 55, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            color: #fff;
+            display: none;
+        }
+        .result-box.show {
+            display: block;
+            animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .result-title {
+            font-size: 0.85rem;
+            color: var(--primary-yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .result-value {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 10vh 5vw;
+            align-items: center;
+        }
+        .text-content { max-width: 90%; }
+        
+        @media (max-width: 768px) {
+            .feature-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="watermark">portage</div>
+    
+    <nav class="navbar">
+        <div class="nav-left">
+            <span class="logo">portage<sup style="font-size: 0.5em; top: -1em;">®</sup></span>
+        </div>
+        <div class="nav-center">
+            Smart Trade Facilitation System
+        </div>
+        <div class="nav-right">
+            <a href="#features" class="nav-link">Platform Features</a>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="hero-content">
+            <div class="step-indicator">
+                <span class="step-num">01 / </span> At the dock
+            </div>
+            
+            <h1 class="headline">
+                <div class="line-1">Goods cross</div>
+                <div class="line-2">borders in days.</div>
+                <div class="line-3">Paperwork</div>
+                <div class="line-4">shouldn't.</div>
+            </h1>
+            
+            <p class="subtitle">
+                One container, one crossing. Portage keeps the export moving while every declaration finds the right desk instantly.
+            </p>
+        </div>
+    </main>
+
+    <div id="features">
+        <section class="feature-grid">
+            <div class="text-content">
+                <h2 class="section-title">Intelligent Routing</h2>
+                <p class="section-text">Instantly calculate the absolute fastest transit paths across global port networks, factoring in dynamic congestion and shipping lanes.</p>
+                <div class="input-group">
+                    <select id="route-start" class="ui-input">
+                        <option value="Shanghai">Shanghai</option>
+                        <option value="Tokyo">Tokyo</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Dubai">Dubai</option>
+                        <option value="Los Angeles">Los Angeles</option>
+                        <option value="Rotterdam">Rotterdam</option>
+                    </select>
+                    <span style="color:#fff; margin:0 10px;">➔</span>
+                    <select id="route-end" class="ui-input">
+                        <option value="Rotterdam">Rotterdam</option>
+                        <option value="Shanghai">Shanghai</option>
+                        <option value="Tokyo">Tokyo</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Dubai">Dubai</option>
+                        <option value="Los Angeles">Los Angeles</option>
+                    </select>
+                </div>
+                <button class="cta-button" onclick="calculateRoute()">Calculate Optimal Path</button>
+                <div id="route-result" class="result-box">
+                    <div class="result-title">Optimized Transit Plan</div>
+                    <div id="route-val" class="result-value"></div>
+                </div>
+            </div>
+            <div class="image-content">
+                <!-- Decorative space for UI balance -->
+            </div>
+        </section>
+
+        <section class="feature-grid" style="background: rgba(0,0,0,0.4);">
+            <div class="image-content">
+                <!-- Decorative space -->
+            </div>
+            <div class="text-content">
+                <h2 class="section-title">Smart Container Loading</h2>
+                <p class="section-text">Our logistics engine automatically packs containers to maximize profit margins while strictly adhering to weight capacities.</p>
+                <div class="input-group">
+                    <input type="number" id="load-capacity" class="ui-input" placeholder="Capacity (Tons)" value="20" min="1" max="100">
+                </div>
+                <button class="cta-button" onclick="optimizeLoad()">Optimize Container</button>
+                <div id="load-result" class="result-box">
+                    <div class="result-title">Loading Manifest Generated</div>
+                    <div id="load-val" class="result-value"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="feature-grid">
+            <div class="text-content">
+                <h2 class="section-title">Priority Customs Clearance</h2>
+                <p class="section-text">High-value and perishable shipments are automatically elevated in the clearance queue, ensuring rapid processing at the dock.</p>
+                <div class="input-group">
+                    <input type="text" id="customs-id" class="ui-input" placeholder="Shipment ID (e.g. CONT-200)">
+                    <select id="customs-type" class="ui-input" style="margin-left: 10px;">
+                        <option value="Electronics">Electronics</option>
+                        <option value="Medical">Medical (Urgent)</option>
+                        <option value="Perishable">Perishable</option>
+                        <option value="Furniture">Furniture</option>
+                    </select>
+                    <button class="cta-button" onclick="addCustoms()" style="margin-left: 10px; padding: 0.8rem 1.2rem;">Add to Queue</button>
+                </div>
+                <button class="cta-button" onclick="processCustoms()" style="margin-top: 1rem;">Process Next Shipment</button>
+                <div id="customs-result" class="result-box">
+                    <div class="result-title">Customs Status: Cleared</div>
+                    <div id="customs-val" class="result-value"></div>
+                </div>
+            </div>
+            <div class="image-content">
+                <!-- Decorative space -->
+            </div>
+        </section>
+
+        <section class="feature-grid" style="background: rgba(0,0,0,0.4);">
+            <div class="image-content">
+                <!-- Decorative space -->
+            </div>
+            <div class="text-content">
+                <h2 class="section-title">Safe Material Storage</h2>
+                <p class="section-text">Uses Backtracking and Graph Coloring algorithms to automatically separate conflicting hazardous materials (like Explosives and Flammable Gases) into the minimum number of safe storage zones.</p>
+                <button class="cta-button" onclick="allocateStorage()">Allocate Storage Zones</button>
+                <div id="storage-result" class="result-box">
+                    <div class="result-title">Storage Allocation Matrix</div>
+                    <div id="storage-val" class="result-value"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-status">System Operational <span class="highlight-yellow">●</span></div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
